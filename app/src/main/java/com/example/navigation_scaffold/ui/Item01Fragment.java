@@ -16,6 +16,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.navigation_scaffold.R;
+import com.example.navigation_scaffold.repository.local.AppDatabase;
+import com.example.navigation_scaffold.repository.local.Item;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +63,18 @@ public class Item01Fragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO : 메뉴 처리
+        switch (item.getItemId()) {
+            case R.id.action_add_data:
+                AppDatabase.getInstance(requireContext()).itemDao().insertItems(
+                        new Item("아이템 1", 1),
+                        new Item("아이템 2", 2),
+                        new Item("아이템 3", 3),
+                        new Item("아이템 4", 4),
+                        new Item("아이템 5", 5),
+                        new Item("아이템 6", 6)
+                );
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
